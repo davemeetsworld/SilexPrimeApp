@@ -5,11 +5,10 @@ require_once __DIR__.'/vendor/autoload.php';
 $app = new Silex\Application();
 
 $app->get('/{numofprimes}', function ($numofprimes) use ($app) {
-    $target = $numofprimes;
     $counter = 0;
     $num = 1;
     $retstring = "";
-    while($counter < $target) {
+    while($counter < $numofprimes) {
         $num++;
         if(isPrime($num)) {
            $counter++;
@@ -24,7 +23,8 @@ $app->get('/', function() use ($app) {
 });
 
 function isPrime($num) {
-   if($num%2 == 0)
+   
+   if($num > 2 && $num%2 == 0)
         return false;
    for($i = $num; $i>1; $i--) {
         if( ($num % $i == 0) && ($i != $num) ) {
